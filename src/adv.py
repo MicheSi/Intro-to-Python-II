@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+
 # Declare all the rooms
 
 room = {
@@ -40,6 +41,8 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Player1', room['outside'])
 
+print(player)
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -52,9 +55,9 @@ player = Player('Player1', room['outside'])
 # If the user enters "q", quit the game.
 while True:
     # print current room name & description
-    current_room = player.current_room
-    print(f'Current room: {current_room.name}')
-    print(f'Current description: {current_room.description}')
+    
+    print(f'{player.current_room}')
+    # print(f'Current description: {room[player.current_room].description}')
     # waiting for user input
     move = input('Select a direction to move or type "q" to quit.')
     # if 'q' is entered, display msg and quit sequence
@@ -63,7 +66,7 @@ while True:
         break
     # move based on player input
     try:
-        elif move == 'n':
+        if move == 'n':
             player.move(move)
         elif move == 's':
             player.move(move)
