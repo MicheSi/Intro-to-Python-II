@@ -68,6 +68,7 @@ while True:
         if move == 'n':
             if player.current_room.n_to == None:
                 print('You cannot go that way!')
+                player.move(player.s_to)
             else:
                 player.move(player.current_room.n_to)
         if move == 's':
@@ -87,4 +88,3 @@ while True:
                 player.move(player.current_room.w_to)
     except AttributeError:
         print('Choose n, s, e, or w to move to another room')
-        player.move(room['outside'])
