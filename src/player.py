@@ -8,5 +8,5 @@ class Player:
 
     def __str__(self):
         return f'{self.name} is {self.current_room}'
-    def move(self):
-        pass
+    def move(self, room):
+        self.current_room = room

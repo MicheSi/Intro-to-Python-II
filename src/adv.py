@@ -55,7 +55,6 @@ print(player)
 # If the user enters "q", quit the game.
 while True:
     # print current room name & description
-    
     print(f'{player.current_room}')
     # print(f'Current description: {room[player.current_room].description}')
     # waiting for user input
@@ -67,14 +66,25 @@ while True:
     # move based on player input
     try:
         if move == 'n':
-            player.move(move)
-        elif move == 's':
-            player.move(move)
-        elif move == 'e':
-            player.move(move)
-        elif move == 'w':
-            player.move(move)
-        else:
-            print('Move is not allowed')
-    except ValueError:
-        print('Please enter n, s, e, or w to move to another room')
+            if player.current_room.n_to == None:
+                print('You cannot go that way!')
+            else:
+                player.move(player.current_room.n_to)
+        if move == 's':
+            if player.current_room.s_to == None:
+                print('You cannot go that way!')
+            else:
+                player.move(player.current_room.s_to)
+        if move == 'e':
+            if player.current_room.e_to == None:
+                print('You cannot go that way!')
+            else:
+                player.move(player.current_room.e_to)
+        if move == 'w':
+            if player.current_room == None:
+                print('You cannot go that way!')
+            else:
+                player.move(player.current_room.w_to)
+    except AttributeError:
+        print('Choose n, s, e, or w to move to another room')
+        player.move(room['outside'])
