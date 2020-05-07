@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +39,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player('Player1', room['outside'])
+
+# print(player)
 
 # Write a loop that:
 #
@@ -49,3 +53,37 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+while True:
+    # print current room name & description
+    print(f'\n{player.current_room}\n')
+    # print(f'Current description: {room[player.current_room].description}')
+    # waiting for user input
+    move = input('Select a direction to move or type "q" to quit.')
+    # if 'q' is entered, display msg and quit sequence
+    if move == 'q':
+        print('Thanks for playing')
+        break
+    # move based on player input
+    try:
+        if move == 'n':
+            if player.current_room.n_to == None:
+                print('\nYou cannot go that way!\n')
+            else:
+                player.move(player.current_room.n_to)
+        if move == 's':
+            if player.current_room.s_to == None:
+                print('You cannot go that way!')
+            else:
+                player.move(player.current_room.s_to)
+        if move == 'e':
+            if player.current_room.e_to == None:
+                print('You cannot go that way!')
+            else:
+                player.move(player.current_room.e_to)
+        if move == 'w':
+            if player.current_room.w_to == None:
+                print('You cannot go that way!') 
+            else:
+                player.move(player.current_room.w_to)
+    except AttributeError:
+        print('Choose n, s, e, or w to move to another room')
