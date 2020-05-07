@@ -1,6 +1,6 @@
 class Item:
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
+    def __init__(self, item, item_desc):
+        self.item = item
+        self.item_desc = item_desc
     def __str__(self):
-        return f'{self.name}: {self.description}'
+        return f'{self.item}: {self.item_desc}'

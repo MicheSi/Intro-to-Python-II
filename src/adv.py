@@ -5,21 +5,21 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", 'Tent', 'used to sleep and heal player'),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", 'Matches', 'used to light a fire'),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", 'Candle', 'used to see in the dark'),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", 'Axe', 'used to chop things'),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", 'Satchel', 'now empty, it used to be full of treasure'),
 }
 
 
@@ -37,20 +37,20 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Delare all items
-items = {
-    "Axe": Item('Axe', 'used to chop things'),
-    "Matches": Item('Matches', 'used to light a fire'),
-    "Candle": Item('Candle', 'used to see in the dark'),
-    "Tent": Item('Tent', 'used to sleep and heal player'),
-    "Satchel": Item('Satchel', 'now empty, it used to be full of treasure')
-}
+# items = {
+#     "Axe": Item('Axe', 'used to chop things'),
+#     "Matches": Item('Matches', 'used to light a fire'),
+#     "Candle": Item('Candle', 'used to see in the dark'),
+#     "Tent": Item('Tent', 'used to sleep and heal player'),
+#     "Satchel": Item('Satchel', 'now empty, it used to be full of treasure')
+# }
 
 # Link items to rooms
-room['outside'].items = items['Tent']
-room['foyer'].items = items['Matches'] 
-room['overlook'].items = items['Candle']
-room['narrow'].items = items['Axe']
-room['treasure'].items = items['Satchel']
+# room['outside'].items = items['Tent']
+# room['foyer'].items = items['Matches'] 
+# room['overlook'].items = items['Candle']
+# room['narrow'].items = items['Axe']
+# room['treasure'].items = items['Satchel']
 
 # Main
 #
@@ -58,7 +58,7 @@ room['treasure'].items = items['Satchel']
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Player1', room['outside'])
 
-item_list = player.current_room.items
+
 # print(item_list)
 
 # print(player)
@@ -77,7 +77,6 @@ while True:
     # print current room name & description
     print(f'\n{player}\n')
     
-    print(f'Available items: {item_list}')
     # print(f'Current description: {room[player.current_room].description}')
     # waiting for user input
     move = input('\nSelect a direction to move or type "q" to quit. ')
