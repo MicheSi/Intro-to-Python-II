@@ -60,7 +60,7 @@ while True:
     item_pickup = input('\nWould you like to pick up the item? Type "yes" or "no" ')
     if item_pickup == 'yes':
         player.take_item(player.current_room.item)
-        print(f'Inventory: {player.inventory}')
+        print(f'\nInventory: {player.inventory}')
     if item_pickup == 'no':
         pass
 
@@ -72,10 +72,10 @@ while True:
 
     item_drop = input('\nDo you want to drop an item? Type "yes" or "no" ')
     if item_drop == 'yes':
-        pick_item = input('\nType in the item name to drop ')
+        pick_item = input('\nType in the item name to drop: ')
         if pick_item == 'Axe' or pick_item == 'Matches' or pick_item == 'Candle' or pick_item == 'Tent':
             player.drop_item(pick_item)
-            print(f'Inventory: {player.inventory}')
+            print(f'\nInventory: {player.inventory}')
     if item_drop == 'no':
         pass
     # move based on player input

@@ -14,16 +14,16 @@ class Room(Item):
         self.item = item
     
     def __str__(self):
-        return f'{self.name}: {self.description}\nAvailable Items: {self.item} - {self.item_desc}'
+        return f'{self.name}: {self.description}\n\nAvailable Items: {self.item} - {self.item_desc}'
 
-    def add_Item(self, *room_Item):
+    def add_item(self, *room_Item):
         for i in room_Item:
             self.item.append(i)
     
-    def remove_Item(self):
+    def remove_item(self, item):
         if i in self.item:
             self.item.remove(i)
 
-    def print_Item(self):
+    def print_item(self):
         for i in self.item:
             print(i)

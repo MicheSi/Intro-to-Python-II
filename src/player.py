@@ -14,9 +14,9 @@ class Player:
         self.current_room = room
     
     def take_item(self, item):
-        print(f'Added {item}')
+        print(f'\nYou have picked up {item}')
         self.inventory.append(item)
 
     def drop_item(self, item):
-        print(f'Dropped {self.inventory}')
+        print(f'\nYou have dropped {self.inventory}')
         self.inventory.remove(item)
