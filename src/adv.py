@@ -35,6 +35,16 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 #
+
+# Delare all items
+items = {
+    "Axe": [Item('Axe', 'used to chop things')],
+    "Matches": [Item('Matches', 'used to light a fire')],
+    "Candle": [Item('Candle', 'used to see in the dark')],
+    "Tent": [Item('Tent', 'used to sleep and heal player')]
+    "Satchel": [Item('Satchel', 'now empty, it used to be full of treasure')]
+}
+
 # Main
 #
 
