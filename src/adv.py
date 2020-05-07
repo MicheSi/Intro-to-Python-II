@@ -38,11 +38,11 @@ room['treasure'].s_to = room['narrow']
 
 # Delare all items
 items = {
-    "Axe": [Item('Axe', 'used to chop things')],
-    "Matches": [Item('Matches', 'used to light a fire')],
-    "Candle": [Item('Candle', 'used to see in the dark')],
-    "Tent": [Item('Tent', 'used to sleep and heal player')]
-    "Satchel": [Item('Satchel', 'now empty, it used to be full of treasure')]
+    "Axe": Item('Axe', 'used to chop things'),
+    "Matches": Item('Matches', 'used to light a fire'),
+    "Candle": Item('Candle', 'used to see in the dark'),
+    "Tent": Item('Tent', 'used to sleep and heal player'),
+    "Satchel": Item('Satchel', 'now empty, it used to be full of treasure')
 }
 
 # Link items to rooms
@@ -57,6 +57,9 @@ room['treasure'].items = items['Satchel']
 
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Player1', room['outside'])
+
+item_list = player.current_room.items
+# print(item_list)
 
 # print(player)
 
@@ -73,6 +76,8 @@ player = Player('Player1', room['outside'])
 while True:
     # print current room name & description
     print(f'\n{player}\n')
+    
+    print(f'Available items: {item_list}')
     # print(f'Current description: {room[player.current_room].description}')
     # waiting for user input
     move = input('\nSelect a direction to move or type "q" to quit. ')
@@ -87,6 +92,7 @@ while True:
                 print('\nYou cannot go that way!\n')
             else:
                 player.move(player.current_room.n_to)
+
         elif move == 's':
             if player.current_room.s_to == None:
                 print('\nYou cannot go that way!\n')
