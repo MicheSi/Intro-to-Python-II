@@ -20,6 +20,8 @@ to north. The smell of gold permeates the air.""", 'Axe', 'used to chop things')
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south.""", 'Satchel', 'now empty, it used to be full of treasure'),
+
+    'dungeon': Room('Dungeon Room', """"You've fallen into the dungeon room where a dragon awaits it's new prey.""", 'Sword', 'Defend yourself!')
 }
 
 
@@ -32,6 +34,7 @@ room['foyer'].e_to = room['narrow']
 room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
+room['narrow'].s_to = room['dungeon']
 room['treasure'].s_to = room['narrow']
 
 #
@@ -57,6 +60,7 @@ while True:
     print(f'\n{player}\n')
     
     # waiting for user input
+    # pick up item
     item_pickup = input('\nWould you like to pick up the item? Type "yes" or "no" ')
     if item_pickup == 'yes':
         player.take_item(player.current_room.item)
@@ -64,12 +68,7 @@ while True:
     if item_pickup == 'no':
         pass
 
-    move = input('\nSelect a direction to move or type "q" to quit. ')
-    # if 'q' is entered, display msg and quit sequence
-    if move == 'q':
-        print('\nThanks for playing\n')
-        break
-
+    # drop an item
     item_drop = input('\nDo you want to drop an item? Type "yes" or "no" ')
     if item_drop == 'yes':
         pick_item = input('\nType in the item name to drop: ')
@@ -78,6 +77,14 @@ while True:
             print(f'\nInventory: {player.inventory}')
     if item_drop == 'no':
         pass
+
+    # pick direction to move
+    move = input('\nSelect a direction to move or type "q" to quit. ')
+    # if 'q' is entered, display msg and quit sequence
+    if move == 'q':
+        print('\nThanks for playing\n')
+        break
+
     # move based on player input
     try:
         if move == 'n':
