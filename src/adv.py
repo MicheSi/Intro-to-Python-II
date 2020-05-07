@@ -45,6 +45,13 @@ items = {
     "Satchel": [Item('Satchel', 'now empty, it used to be full of treasure')]
 }
 
+# Link items to rooms
+room['outside'].items = items['Tent']
+room['foyer'].items = items['Matches'] 
+room['overlook'].items = items['Candle']
+room['narrow'].items = items['Axe']
+room['treasure'].items = items['Satchel']
+
 # Main
 #
 
