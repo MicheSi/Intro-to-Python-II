@@ -5,8 +5,18 @@ class Player:
     def __init__(self, name, current_room):
         self.name = name
         self.current_room = current_room
+        self.inventory = []
 
     def __str__(self):
-        return f'{self.name} is {self.current_room}'
+        return f'{self.name} location: {self.current_room}'
+
     def move(self, room):
         self.current_room = room
+    
+    def take_item(self, item):
+        print(f'\nYou have picked up {item}')
+        self.inventory.append(item)
+
+    def drop_item(self, item):
+        print(f'\nYou have dropped {self.inventory}')
+        self.inventory.remove(item)

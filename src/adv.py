@@ -1,25 +1,27 @@
 from room import Room
 from player import Player
-
+from item import Item
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", 'Tent', 'used to sleep and heal player'),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", 'Matches', 'used to light a fire'),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", 'Candle', 'used to see in the dark'),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", 'Axe', 'used to chop things'),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", 'Satchel', 'now empty, it used to be full of treasure'),
+
+    'dungeon': Room('Dungeon Room', """"You've fallen into the dungeon room where a dragon awaits it's new prey.""", 'Sword', 'Defend yourself!')
 }
 
 
@@ -32,16 +34,16 @@ room['foyer'].e_to = room['narrow']
 room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
+room['narrow'].s_to = room['dungeon']
 room['treasure'].s_to = room['narrow']
 
 #
+
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Player1', room['outside'])
-
-# print(player)
 
 # Write a loop that:
 #
@@ -55,14 +57,34 @@ player = Player('Player1', room['outside'])
 # If the user enters "q", quit the game.
 while True:
     # print current room name & description
-    print(f'\n{player.current_room}\n')
-    # print(f'Current description: {room[player.current_room].description}')
+    print(f'\n{player}\n')
+    
     # waiting for user input
-    move = input('Select a direction to move or type "q" to quit.')
+    # pick up item
+    item_pickup = input('\nWould you like to pick up the item? Type "yes" or "no" ')
+    if item_pickup == 'yes':
+        player.take_item(player.current_room.item)
+        print(f'\nInventory: {player.inventory}')
+    if item_pickup == 'no':
+        pass
+
+    # drop an item
+    item_drop = input('\nDo you want to drop an item? Type "yes" or "no" ')
+    if item_drop == 'yes':
+        pick_item = input('\nType in the item name to drop: ')
+        if pick_item == 'Axe' or pick_item == 'Matches' or pick_item == 'Candle' or pick_item == 'Tent':
+            player.drop_item(pick_item)
+            print(f'\nInventory: {player.inventory}')
+    if item_drop == 'no':
+        pass
+
+    # pick direction to move
+    move = input('\nSelect a direction to move or type "q" to quit. ')
     # if 'q' is entered, display msg and quit sequence
     if move == 'q':
-        print('Thanks for playing')
+        print('\nThanks for playing\n')
         break
+
     # move based on player input
     try:
         if move == 'n':
@@ -70,20 +92,22 @@ while True:
                 print('\nYou cannot go that way!\n')
             else:
                 player.move(player.current_room.n_to)
-        if move == 's':
+        elif move == 's':
             if player.current_room.s_to == None:
-                print('You cannot go that way!')
+                print('\nYou cannot go that way!\n')
             else:
                 player.move(player.current_room.s_to)
-        if move == 'e':
+        elif move == 'e':
             if player.current_room.e_to == None:
-                print('You cannot go that way!')
+                print('\nYou cannot go that way!\n')
             else:
                 player.move(player.current_room.e_to)
-        if move == 'w':
+        elif move == 'w':
             if player.current_room.w_to == None:
-                print('You cannot go that way!') 
+                print('\nYou cannot go that way!\n') 
             else:
                 player.move(player.current_room.w_to)
+        else:
+            print('\nChoose n, s, e or w to move to another room\n')
     except AttributeError:
         print('Choose n, s, e, or w to move to another room')
